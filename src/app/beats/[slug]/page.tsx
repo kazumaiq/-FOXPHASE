@@ -98,7 +98,7 @@ export default function BeatDetailPage() {
                   <p className="font-mono text-xs uppercase tracking-widest text-white/75">
                     {beat.genre}
                   </p>
-                  <h1 className="font-display text-3xl font-black uppercase tracking-tight text-white">
+                  <h1 className="break-words font-display text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
                     {beat.title}
                   </h1>
                 </div>
@@ -163,10 +163,10 @@ export default function BeatDetailPage() {
             <div>
               <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-6">
                 <div>
-                  <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#85878D]">
+                  <span className="font-mono text-xs uppercase tracking-[0.24em] text-amber-300">
                     {beat.genre} · {beat.subgenre}
                   </span>
-                  <h2 className="mt-2 font-display text-4xl font-black uppercase tracking-tight text-chrome md:text-5xl">
+                  <h2 className="mt-2 break-words font-display text-2xl font-black uppercase tracking-tight text-chrome sm:text-4xl md:text-5xl">
                     {beat.title}
                   </h2>
                   <p className="mt-2 text-sm text-[#85878D]">

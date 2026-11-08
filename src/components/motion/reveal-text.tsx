@@ -27,11 +27,14 @@ export function RevealHeading({
   const words = text.split(" ");
 
   return (
-    <Tag className={`inline-block ${className}`} aria-label={text}>
+    <Tag
+      className={`block max-w-full break-words ${className}`}
+      aria-label={text}
+    >
       {words.map((word, index) => (
         <span
           key={`${word}-${index}`}
-          className="inline-block overflow-hidden align-bottom mr-[0.25em] last:mr-0 pb-[0.06em]"
+          className="inline-block max-w-full overflow-hidden align-bottom mr-[0.22em] last:mr-0 pb-[0.06em]"
         >
           <motion.span
             initial={{ y: "112%", rotateZ: 2.5, opacity: 0 }}
@@ -42,7 +45,7 @@ export function RevealHeading({
               delay: delay + index * 0.045,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="inline-block will-change-transform"
+            className="inline-block max-w-full break-words will-change-transform"
           >
             {word}
           </motion.span>

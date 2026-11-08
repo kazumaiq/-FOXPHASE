@@ -38,7 +38,7 @@ export function PageFrame({
             <RevealHeading
               as="h1"
               text={title}
-              className="max-w-5xl font-display text-3xl font-black uppercase leading-[0.95] tracking-[-0.03em] text-chrome sm:text-5xl md:text-7xl"
+              className="max-w-5xl font-display text-[1.55rem] font-black uppercase leading-[0.98] tracking-[-0.04em] text-chrome sm:text-5xl md:text-7xl"
             />
 
             {subtitle && (

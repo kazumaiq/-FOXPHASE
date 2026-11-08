@@ -62,6 +62,7 @@ export interface ReleaseItem {
   year: string;
   description: { en: string; ru: string };
   yandexMusicUrl: string;
+  coverUrl: string;
   coverStyle: string;
   code: string;
 }
