@@ -91,10 +91,16 @@ export default function CartPage() {
                         }
                         className="rounded-xl border border-white/15 bg-[#050505] px-3.5 py-2 font-mono text-xs uppercase text-white focus:border-red-500 focus:outline-none"
                       >
-                        <option value="basic">MP3 Lease — $15 (1500 ₽)</option>
-                        <option value="premium">WAV Lease — $20 (2000 ₽)</option>
+                        <option value="basic">🥉 MP3 Lease — $15 (1 000 ₽)</option>
+                        <option value="premium">🥈 WAV Lease — $20 (2 000 ₽)</option>
+                        <option value="trackout">
+                          🥇 Trackout Lease — $70 (5 700 ₽)
+                        </option>
                         <option value="unlimited">
-                          Unlimited Stems — $50 (5000 ₽)
+                          💎 Unlimited Lease — $120 (9 800 ₽)
+                        </option>
+                        <option value="exclusive">
+                          👑 Exclusive Rights — from $350 (от 29 000 ₽)
                         </option>
                       </select>
 

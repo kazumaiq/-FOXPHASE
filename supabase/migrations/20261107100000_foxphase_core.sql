@@ -197,10 +197,11 @@ create policy "admins manage site settings" on public.site_settings for all usin
 
 -- Verified Seed Data (Strictly Confirmed FOXPHASE Information Only)
 insert into public.licenses (slug, name, terms, active) values
-  ('basic', 'BASIC LICENSE', '{"format": "MP3", "price_usd": 15, "price_rub": 1500, "note": "Terms subject to confirmation with FOXPHASE"}'::jsonb, true),
-  ('premium', 'PREMIUM LICENSE', '{"format": "WAV + MP3", "price_usd": 20, "price_rub": 2000, "note": "Terms subject to confirmation with FOXPHASE"}'::jsonb, true),
-  ('unlimited', 'UNLIMITED LICENSE', '{"format": "WAV + Stems", "note": "Terms subject to confirmation with FOXPHASE"}'::jsonb, true),
-  ('exclusive', 'EXCLUSIVE RIGHTS', '{"format": "Full Exclusive Buyout", "note": "By individual agreement with FOXPHASE"}'::jsonb, true)
+  ('basic', 'MP3 LEASE', '{"format": "MP3", "price_usd": 15, "price_rub": 1000, "note": "MP3 file + non-exclusive license"}'::jsonb, true),
+  ('premium', 'WAV LEASE', '{"format": "WAV + MP3", "price_usd": 20, "price_rub": 2000, "note": "High-quality WAV + MP3 files and a non-exclusive license"}'::jsonb, true),
+  ('trackout', 'TRACKOUT LEASE', '{"format": "MP3 + WAV + STEMS", "price_usd": 70, "price_rub": 5700, "note": "MP3 + WAV + individual STEMS for professional mixing"}'::jsonb, true),
+  ('unlimited', 'UNLIMITED LEASE', '{"format": "MP3 + WAV + STEMS", "price_usd": 120, "price_rub": 9800, "note": "Extended commercial license with unlimited streams and plays"}'::jsonb, true),
+  ('exclusive', 'EXCLUSIVE RIGHTS', '{"format": "Full Exclusive Buyout", "price_usd_from": 350, "price_rub_from": 29000, "note": "Beat removed from future sales. Conditions discussed individually"}'::jsonb, true)
 on conflict (slug) do nothing;
 
 insert into public.releases (title, description, links, published) values
@@ -223,12 +224,12 @@ insert into public.collaborations (artist_name, published) values
   ('Chelsy smile', true);
 
 insert into public.services (slug, price_cents, content, active) values
-  ('mp3-beat', 1500, '{"title": "MP3 Beat", "price_display": "$15 / 1500 RUB"}'::jsonb, true),
-  ('wav-beat', 2000, '{"title": "WAV Beat", "price_display": "$20 / 2000 RUB"}'::jsonb, true),
-  ('exclusive-rights', null, '{"title": "Exclusive Rights", "price_display": "By Agreement"}'::jsonb, true),
-  ('custom-beat', null, '{"title": "Custom Beat", "price_display": "By Agreement"}'::jsonb, true),
-  ('mixing', null, '{"title": "Mixing", "price_display": "TBD"}'::jsonb, true),
-  ('mastering', null, '{"title": "Mastering", "price_display": "TBD"}'::jsonb, true)
+  ('mp3-lease', 1500, '{"title": "MP3 LEASE", "price_display": "1 000 RUB / $15"}'::jsonb, true),
+  ('wav-lease', 2000, '{"title": "WAV LEASE", "price_display": "2 000 RUB / $20"}'::jsonb, true),
+  ('trackout-lease', 7000, '{"title": "TRACKOUT LEASE", "price_display": "5 700 RUB / $70"}'::jsonb, true),
+  ('unlimited-lease', 12000, '{"title": "UNLIMITED LEASE", "price_display": "9 800 RUB / $120"}'::jsonb, true),
+  ('exclusive-rights', 35000, '{"title": "EXCLUSIVE RIGHTS", "price_display": "from 29 000 RUB / $350"}'::jsonb, true),
+  ('custom-beat', null, '{"title": "Custom Beat / Mixing / Mastering", "price_display": "By Agreement"}'::jsonb, true)
 on conflict (slug) do nothing;
 
 insert into public.site_settings (key, value) values

@@ -2,11 +2,18 @@
 
 import React from "react";
 import Link from "next/link";
-import { ShieldAlert, Check, ArrowUpRight, FileAudio, Scale } from "lucide-react";
+import {
+  Check,
+  ArrowUpRight,
+  FileAudio,
+  Scale,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 import { PageFrame } from "@/components/page-frame";
-import { licenseDefinitions } from "@/content/site";
+import { licenseDefinitions, whyChooseFeatures } from "@/content/site";
 import { useFoxphase } from "@/components/providers/foxphase-provider";
-import { FadeUpBlock } from "@/components/motion/reveal-text";
+import { FadeUpBlock, Interactive3DTilt } from "@/components/motion/reveal-text";
 
 export default function LicensesPage() {
   const { locale } = useFoxphase();
@@ -14,160 +21,219 @@ export default function LicensesPage() {
 
   return (
     <PageFrame
-      eyebrow={isRu ? "ЛИЦЕНЗИРОВАНИЕ И ПРАВА" : "LICENSING ARCHITECTURE"}
-      title={isRu ? "ТИПЫ ЛИЦЕНЗИЙ." : "CLEAR RIGHTS. ZERO FRICTION."}
+      eyebrow={
+        isRu ? "🎧 ПРОДАЖА БИТОВ | ПРАЙС И ЛИЦЕНЗИИ" : "🎧 BEATS FOR SALE | PRICING & LICENSES"
+      }
+      title={isRu ? "ВАРИАНТЫ ЛИЦЕНЗИРОВАНИЯ." : "LICENSING OPTIONS."}
       subtitle={
         isRu
-          ? "Подробное описание четырёх уровней лицензирования инструменталов FOXPHASE: BASIC, PREMIUM, UNLIMITED и EXCLUSIVE."
-          : "Detailed breakdown of the four official FOXPHASE licensing tiers: BASIC, PREMIUM, UNLIMITED, and EXCLUSIVE RIGHTS."
+          ? "Предлагаю качественные авторские биты для артистов и исполнителей. Все инструменталы доступны в нескольких вариантах лицензирования — от базовой аренды до эксклюзивного приобретения."
+          : "High-quality original beats available for artists and performers. Choose from different licensing options, from basic leases to exclusive rights."
       }
     >
-      <section className="mx-auto max-w-7xl px-5 pb-28 md:px-10">
-        {/* Mandatory Legal Integrity Notice */}
+      <section className="mx-auto max-w-7xl px-4 pb-28 sm:px-6 md:px-10">
+        {/* Why Choose My Beats Block */}
         <FadeUpBlock>
-          <div className="mb-12 rounded-3xl border border-white/15 bg-[#101114]/90 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex items-start gap-4">
-              <ShieldAlert size={24} className="text-white shrink-0 mt-1" />
+          <div className="surface-glass mb-12 rounded-3xl p-6 sm:p-8 md:p-10">
+            <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
-                <p className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-white">
+                <div className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.22em] text-red-400">
+                  <Sparkles size={15} />
+                  <span>
+                    {isRu
+                      ? "ПОЧЕМУ СТОИТ ВЫБРАТЬ МОИ БИТЫ?"
+                      : "WHY CHOOSE MY BEATS?"}
+                  </span>
+                </div>
+                <h2 className="mt-3 font-display text-2xl font-black uppercase text-white sm:text-3xl">
                   {isRu
-                    ? "ЮРИДИЧЕСКОЕ УВЕДОМЛЕНИЕ · РЕДАКТИРУЕМЫЕ ПАРАМЕТРЫ"
-                    : "LEGAL NOTICE · EDITABLE CONTRACT PARAMETERS"}
-                </p>
-                <p className="mt-2 max-w-3xl text-sm leading-6 text-[#85878D]">
-                  {isRu
-                    ? "Точные договорные обязательства, лимиты стримов, территориальные условия и доли паблишинга формируются индивидуально и требуют финального согласования с FOXPHASE. Мы не публикуем вымышленные юридические ограничения."
-                    : "Exact contractual stream caps, publishing splits, and territorial clauses are customizable per agreement and require direct confirmation with FOXPHASE. No fabricated legal terms are asserted."}
-                </p>
+                    ? "СОЗДАВАЙ СВОЮ МУЗЫКУ. ОСТАЛЬНОЕ — МОЯ РАБОТА."
+                    : "CREATE YOUR SOUND. I'LL PROVIDE THE BEAT."}
+                </h2>
+                <ul className="mt-5 grid gap-2.5 sm:grid-cols-2 text-sm text-[#E8E8E8]">
+                  {(isRu ? whyChooseFeatures.ru : whyChooseFeatures.en).map(
+                    (item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <CheckCircle2
+                          size={16}
+                          className="mt-0.5 shrink-0 text-red-400"
+                        />
+                        <span>{item}</span>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-red-500/25 bg-[#050505]/90 p-6 flex flex-col justify-between gap-4">
+                <div>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-red-400">
+                    PRODUCED BY FOXPHASE
+                  </span>
+                  <p className="mt-2 text-xs leading-6 text-[#85878D]">
+                    {isRu
+                      ? "📩 По вопросам покупки, лицензирования и индивидуальных заказов пишите в Direct / Telegram или оформляйте заказ через каталог."
+                      : "📩 For purchases, licensing and custom inquiries, feel free to send me a DM or select your beat in the store."}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  <Link
+                    href="/beats"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-red-500 hover:text-white"
+                  >
+                    <span>{isRu ? "Выбрать бит" : "Browse Beats"}</span>
+                    <ArrowUpRight size={14} />
+                  </Link>
+                  <a
+                    href="https://t.me/FOXPHASE"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-white transition hover:border-red-500"
+                  >
+                    <span>Telegram DM</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                </div>
               </div>
             </div>
-            <Link
-              href="/contact?topic=Exclusive%20Rights"
-              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#E8E8E8]"
-            >
-              <span>{isRu ? "Согласовать условия" : "Request Custom Terms"}</span>
-              <ArrowUpRight size={14} />
-            </Link>
           </div>
         </FadeUpBlock>
 
-        {/* 4 License Tiers Grid */}
+        {/* 5 License Tiers Grid */}
         <div className="grid gap-6 lg:grid-cols-2">
           {licenseDefinitions.map((lic, index) => (
             <FadeUpBlock
               key={lic.id}
-              delay={index * 0.08}
-              className="surface-card surface-card-hover flex flex-col justify-between rounded-3xl p-7 md:p-9"
+              delay={index * 0.07}
+              className={
+                lic.id === "exclusive" ? "lg:col-span-2" : "lg:col-span-1"
+              }
             >
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-6">
+              <Interactive3DTilt intensity={6} className="h-full">
+                <div className="surface-card surface-card-hover flex h-full flex-col justify-between rounded-3xl p-6 sm:p-9">
                   <div>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#85878D]">
-                      {`0${index + 1} // ${isRu ? lic.badge.ru : lic.badge.en}`}
-                    </span>
-                    <h2 className="mt-2 font-display text-3xl font-black uppercase tracking-tight text-white">
-                      {isRu ? lic.name.ru : lic.name.en}
-                    </h2>
-                  </div>
-                  <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-2.5 text-right">
-                    <span className="block font-mono text-[10px] uppercase tracking-widest text-[#85878D]">
-                      {isRu ? "СТОИМОСТЬ" : "RATE"}
-                    </span>
-                    <span className="font-display text-xl font-bold text-white">
-                      {isRu ? lic.priceDisplay.ru : lic.priceDisplay.en}
-                    </span>
-                  </div>
-                </div>
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-6">
+                      <div>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-red-400">
+                          {`0${index + 1} // ${
+                            isRu ? lic.badge.ru : lic.badge.en
+                          }`}
+                        </span>
+                        <h2 className="mt-2 font-display text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
+                          {isRu ? lic.name.ru : lic.name.en}
+                        </h2>
+                      </div>
+                      <div className="rounded-2xl border border-red-500/30 bg-red-950/20 px-4 py-2.5 text-right">
+                        <span className="block font-mono text-[10px] uppercase tracking-widest text-[#85878D]">
+                          {isRu ? "ПРАЙС" : "PRICING"}
+                        </span>
+                        <span className="font-display text-xl font-bold text-white">
+                          {isRu ? lic.priceDisplay.ru : lic.priceDisplay.en}
+                        </span>
+                      </div>
+                    </div>
 
-                {/* Formats */}
-                <div className="mt-6">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#85878D] flex items-center gap-2">
-                    <FileAudio size={14} className="text-white" />
-                    {isRu ? "ФОРМАТЫ ФАЙЛОВ:" : "DELIVERED FILE FORMATS:"}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {lic.formats.map((fmt) => (
-                      <span
-                        key={fmt}
-                        className="rounded-full border border-white/15 bg-[#050505] px-3.5 py-1 font-mono text-xs text-white"
-                      >
-                        {fmt}
-                      </span>
-                    ))}
+                    {/* Formats */}
+                    <div className="mt-6">
+                      <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#85878D]">
+                        <FileAudio size={14} className="text-red-400" />
+                        {isRu ? "ФОРМАТЫ ФАЙЛОВ:" : "DELIVERED FILE FORMATS:"}
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {lic.formats.map((fmt) => (
+                          <span
+                            key={fmt}
+                            className="rounded-full border border-white/15 bg-[#050505] px-3.5 py-1 font-mono text-xs text-white"
+                          >
+                            {fmt}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Structured Terms Matrix */}
+                    <dl className="mt-6 grid gap-3 text-sm sm:grid-cols-2">
+                      <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
+                        <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
+                          {isRu ? "ОПИСАНИЕ ЛИЦЕНЗИИ" : "LICENSE SCOPE"}
+                        </dt>
+                        <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
+                          {isRu ? lic.usageTerms.ru : lic.usageTerms.en}
+                        </dd>
+                      </div>
+
+                      <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
+                        <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
+                          {isRu
+                            ? "КОММЕРЧЕСКОЕ ИСПОЛЬЗОВАНИЕ"
+                            : "COMMERCIAL USE"}
+                        </dt>
+                        <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
+                          {isRu ? lic.commercialUse.ru : lic.commercialUse.en}
+                        </dd>
+                      </div>
+
+                      <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
+                        <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
+                          {isRu ? "УСЛОВИЯ И ПРАВА" : "TERMS & CREDITS"}
+                        </dt>
+                        <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
+                          {isRu ? lic.restrictions.ru : lic.restrictions.en}{" "}
+                          {isRu
+                            ? lic.publishingTerms.ru
+                            : lic.publishingTerms.en}
+                        </dd>
+                      </div>
+
+                      <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
+                        <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
+                          {isRu ? "СТАТУС ПРОДАЖИ" : "AVAILABILITY STATUS"}
+                        </dt>
+                        <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
+                          {isRu ? lic.exclusiveInfo.ru : lic.exclusiveInfo.en}
+                        </dd>
+                      </div>
+                    </dl>
                   </div>
-                </div>
 
-                {/* Structured Terms Matrix */}
-                <dl className="mt-6 space-y-4 text-sm">
-                  <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
-                      {isRu ? "УСЛОВИЯ ИСПОЛЬЗОВАНИЯ" : "USAGE TERMS"}
-                    </dt>
-                    <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
-                      {isRu ? lic.usageTerms.ru : lic.usageTerms.en}
-                    </dd>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
-                      {isRu ? "КОММЕРЧЕСКОЕ ИСПОЛЬЗОВАНИЕ" : "COMMERCIAL USE"}
-                    </dt>
-                    <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
-                      {isRu ? lic.commercialUse.ru : lic.commercialUse.en}
-                    </dd>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
-                      {isRu ? "ОГРАНИЧЕНИЯ И УСЛОВИЯ ПУБЛИКАЦИИ" : "RESTRICTIONS & PUBLISHING"}
-                    </dt>
-                    <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
-                      {isRu ? lic.restrictions.ru : lic.restrictions.en}{" "}
-                      {isRu ? lic.publishingTerms.ru : lic.publishingTerms.en}
-                    </dd>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/5 bg-[#050505]/60 p-4">
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-white">
-                      {isRu ? "СТАТУС ЭКСКЛЮЗИВНОСТИ" : "EXCLUSIVITY STATUS"}
-                    </dt>
-                    <dd className="mt-1.5 text-xs leading-6 text-[#85878D]">
-                      {isRu ? lic.exclusiveInfo.ru : lic.exclusiveInfo.en}
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-
-              <div className="mt-8 border-t border-white/10 pt-6">
-                <p className="mb-4 flex items-center gap-2 font-mono text-[11px] text-[#85878D]">
-                  <Scale size={13} className="text-white shrink-0" />
-                  <span>{isRu ? lic.legalNotice.ru : lic.legalNotice.en}</span>
-                </p>
-
-                <div className="flex flex-wrap gap-3">
-                  {lic.id === "exclusive" || lic.id === "unlimited" ? (
-                    <Link
-                      href="/contact?topic=Exclusive%20Rights"
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#E8E8E8]"
-                    >
+                  <div className="mt-8 border-t border-white/10 pt-6 flex flex-wrap items-center justify-between gap-4">
+                    <p className="flex items-center gap-2 font-mono text-[11px] text-[#85878D]">
+                      <Scale size={13} className="shrink-0 text-red-400" />
                       <span>
-                        {isRu ? "Индивидуальный запрос" : "Submit Individual Request"}
+                        {isRu ? lic.legalNotice.ru : lic.legalNotice.en}
                       </span>
-                      <ArrowUpRight size={14} />
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/beats"
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#E8E8E8]"
-                    >
-                      <Check size={14} />
-                      <span>
-                        {isRu ? "Выбрать бит в каталоге" : "Select Beat in Store"}
-                      </span>
-                    </Link>
-                  )}
+                    </p>
+
+                    <div className="flex flex-wrap gap-3">
+                      {lic.id === "exclusive" ? (
+                        <Link
+                          href="/contact?topic=Exclusive%20Rights"
+                          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-red-500 hover:text-white"
+                        >
+                          <span>
+                            {isRu
+                              ? "Запросить эксклюзив (от 29 000 ₽)"
+                              : "Inquire Exclusive (from $350)"}
+                          </span>
+                          <ArrowUpRight size={14} />
+                        </Link>
+                      ) : (
+                        <Link
+                          href="/beats"
+                          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-red-500 hover:text-white"
+                        >
+                          <Check size={14} />
+                          <span>
+                            {isRu
+                              ? "Выбрать бит в каталоге"
+                              : "Select Beat in Store"}
+                          </span>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Interactive3DTilt>
             </FadeUpBlock>
           ))}
         </div>

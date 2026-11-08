@@ -131,15 +131,15 @@ export function BeatStore() {
         {/* Studio Integrity Notice */}
         <div className="mb-8 rounded-2xl border border-white/10 bg-[#101114]/90 px-5 py-4 text-xs leading-6 text-[#85878D] flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Sparkles size={15} className="text-white shrink-0" />
+            <Sparkles size={15} className="text-red-400 shrink-0" />
             <span>
               {isRu
-                ? "Каталог подготовлен для загрузки реальных превью через /admin. Никакие сторонние или фиктивные аудиозаписи не подставляются."
-                : "Catalogue records operate in strict producer integrity mode. Official audio previews and stems are managed via /admin — no fake substitute audio is used."}
+                ? "🔥 БИТЫ ДОСТУПНЫ К ПОКУПКЕ! Все инструменталы доступны в 5 вариантах лицензирования — от MP3 Lease до Exclusive Rights."
+                : "🔥 BEATS AVAILABLE FOR PURCHASE! Choose from 5 licensing options, from MP3 Lease to Exclusive Rights."}
             </span>
           </div>
           <span className="font-mono text-[11px] uppercase tracking-wider text-white">
-            MP3 $15 (1500 ₽) · WAV $20 (2000 ₽)
+            🥉 MP3 1 000 ₽ ($15) · 🥈 WAV 2 000 ₽ ($20) · 🥇 STEMS 5 700 ₽ ($70) · 💎 UNLIM 9 800 ₽ ($120)
           </span>
         </div>
 
@@ -365,7 +365,7 @@ export function BeatStore() {
                     </div>
 
                     {/* License Selector Pills */}
-                    <div className="mt-6 grid grid-cols-3 gap-2">
+                    <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
                       <button
                         type="button"
                         onClick={() =>
@@ -376,17 +376,17 @@ export function BeatStore() {
                         }
                         className={`rounded-xl border px-3 py-2 text-left transition ${
                           activeTier === "basic"
-                            ? "border-white bg-white/10 text-white"
+                            ? "border-red-500 bg-red-950/30 text-white"
                             : "border-white/10 bg-[#050505]/60 text-[#85878D] hover:border-white/30"
                         }`}
                       >
                         <span className="block font-mono text-[10px] uppercase">
-                          MP3 Lease
+                          🥉 MP3 Lease
                         </span>
                         <span className="font-display text-sm font-bold text-white">
                           $15{" "}
                           <span className="font-mono text-[10px] font-normal text-[#85878D]">
-                            / 1500₽
+                            / 1 000₽
                           </span>
                         </span>
                       </button>
@@ -401,34 +401,70 @@ export function BeatStore() {
                         }
                         className={`rounded-xl border px-3 py-2 text-left transition ${
                           activeTier === "premium"
-                            ? "border-white bg-white/10 text-white"
+                            ? "border-red-500 bg-red-950/30 text-white"
                             : "border-white/10 bg-[#050505]/60 text-[#85878D] hover:border-white/30"
                         }`}
                       >
                         <span className="block font-mono text-[10px] uppercase">
-                          WAV Master
+                          🥈 WAV Lease
                         </span>
                         <span className="font-display text-sm font-bold text-white">
                           $20{" "}
                           <span className="font-mono text-[10px] font-normal text-[#85878D]">
-                            / 2000₽
+                            / 2 000₽
                           </span>
                         </span>
                       </button>
 
-                      <Link
-                        href={`/contact?topic=Exclusive%20Rights&beat=${encodeURIComponent(
-                          beat.title
-                        )}`}
-                        className="rounded-xl border border-white/10 bg-[#050505]/60 px-3 py-2 text-left transition hover:border-white/40"
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSelectedTiers((prev) => ({
+                            ...prev,
+                            [beat.id]: "trackout",
+                          }))
+                        }
+                        className={`rounded-xl border px-3 py-2 text-left transition ${
+                          activeTier === "trackout"
+                            ? "border-red-500 bg-red-950/30 text-white"
+                            : "border-white/10 bg-[#050505]/60 text-[#85878D] hover:border-white/30"
+                        }`}
                       >
-                        <span className="block font-mono text-[10px] uppercase text-[#85878D]">
-                          Exclusive
+                        <span className="block font-mono text-[10px] uppercase">
+                          🥇 Trackout
                         </span>
-                        <span className="font-display text-xs font-bold text-[#E8E8E8]">
-                          {isRu ? "По запросу" : "Inquire ↗"}
+                        <span className="font-display text-sm font-bold text-white">
+                          $70{" "}
+                          <span className="font-mono text-[10px] font-normal text-[#85878D]">
+                            / 5 700₽
+                          </span>
                         </span>
-                      </Link>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSelectedTiers((prev) => ({
+                            ...prev,
+                            [beat.id]: "unlimited",
+                          }))
+                        }
+                        className={`rounded-xl border px-3 py-2 text-left transition ${
+                          activeTier === "unlimited"
+                            ? "border-red-500 bg-red-950/30 text-white"
+                            : "border-white/10 bg-[#050505]/60 text-[#85878D] hover:border-white/30"
+                        }`}
+                      >
+                        <span className="block font-mono text-[10px] uppercase">
+                          💎 Unlimited
+                        </span>
+                        <span className="font-display text-sm font-bold text-white">
+                          $120{" "}
+                          <span className="font-mono text-[10px] font-normal text-[#85878D]">
+                            / 9 800₽
+                          </span>
+                        </span>
+                      </button>
                     </div>
 
                     {/* Bottom Action Row */}
@@ -445,13 +481,17 @@ export function BeatStore() {
                         <button
                           type="button"
                           onClick={() => addToCart(beat.id, activeTier)}
-                          className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-[#050505] transition hover:bg-[#E8E8E8]"
+                          className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-[#050505] transition hover:bg-red-500 hover:text-white"
                         >
                           <Check size={14} />
                           <span>
                             {activeTier === "basic"
                               ? "Add Basic"
-                              : "Add WAV ($20)"}
+                              : activeTier === "premium"
+                              ? "Add WAV ($20)"
+                              : activeTier === "trackout"
+                              ? "Add Trackout ($70)"
+                              : "Add Unlimited ($120)"}
                           </span>
                         </button>
                         {inCart && (

@@ -2,9 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, Sliders } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Sliders, Sparkles } from "lucide-react";
 import { PageFrame } from "@/components/page-frame";
-import { officialServices } from "@/content/site";
+import { officialServices, whyChooseFeatures } from "@/content/site";
 import { useFoxphase } from "@/components/providers/foxphase-provider";
 import { FadeUpBlock, Interactive3DTilt } from "@/components/motion/reveal-text";
 
@@ -14,20 +14,20 @@ export default function ServicesPage() {
 
   return (
     <PageFrame
-      eyebrow={isRu ? "УСЛУГИ И ПРАЙС-ЛИСТ" : "SERVICES & RATE CARD"}
+      eyebrow={isRu ? "🎧 ПРОДАЖА БИТОВ И УСЛУГИ" : "🎧 BEATS FOR SALE & SERVICES"}
       title={
         isRu
-          ? "УСЛУГИ ПРОДЮСЕРА И ПРАЙС."
-          : "MAKE THE RECORD FEEL INEVITABLE."
+          ? "ПРАЙС-ЛИСТ И УСЛУГИ."
+          : "OFFICIAL PRICING & SERVICES."
       }
       subtitle={
         isRu
-          ? "Официальные услуги музыкального продюсера FOXPHASE: продакшн битов, кастомные инструменталы, сведение, мастеринг и передача эксклюзивных прав."
-          : "Official production services by FOXPHASE: Beat Production, Custom Beats, Mixing, Mastering, and Exclusive Rights."
+          ? "Предлагаю качественные авторские биты для артистов и исполнителей. Все инструменталы доступны в нескольких вариантах лицензирования — от базовой аренды до эксклюзивного приобретения."
+          : "High-quality original beats available for artists and performers. Choose from different licensing options, from basic leases to exclusive rights."
       }
     >
       <section className="mx-auto max-w-7xl px-4 pb-28 sm:px-6 md:px-10">
-        {/* Official Price Table */}
+        {/* Official Price Table (Exact match to Telegram Channel Pricing) */}
         <FadeUpBlock>
           <div className="surface-glass mb-14 overflow-hidden rounded-3xl">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-5 py-4 sm:px-8 sm:py-5">
@@ -35,79 +35,92 @@ export default function ServicesPage() {
                 <Sliders size={18} className="text-red-400" />
                 <span className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-white">
                   {isRu
-                    ? "ОФИЦИАЛЬНЫЙ ПРАЙС-ЛИСТ FOXPHASE"
-                    : "OFFICIAL FOXPHASE PRICE SCHEDULE"}
+                    ? "🔥 БИТЫ ДОСТУПНЫ К ПОКУПКЕ · ПРАЙС"
+                    : "🔥 BEATS AVAILABLE FOR PURCHASE · PRICING"}
                 </span>
               </div>
-              <span className="font-mono text-[11px] uppercase tracking-widest text-[#85878D]">
-                USD / RUB
+              <span className="font-mono text-[11px] uppercase tracking-widest text-red-400">
+                PRODUCED BY FOXPHASE
               </span>
             </div>
 
             <div className="divide-y divide-white/10">
               {[
                 {
-                  serviceEn: "MP3 Beat",
-                  serviceRu: "MP3 Бит (Аренда)",
-                  priceEn: "$15 / 1500 ₽",
-                  priceRu: "$15 / 1500 ₽",
+                  serviceEn: "🥉 MP3 LEASE",
+                  serviceRu: "🥉 MP3 LEASE",
+                  descEn: "MP3 file + non-exclusive license.",
+                  descRu: "MP3-файл и неисключительная лицензия.",
+                  priceEn: "$15 / 1 000 ₽",
+                  priceRu: "1 000 ₽ / $15",
                   href: "/beats",
                 },
                 {
-                  serviceEn: "WAV Beat",
-                  serviceRu: "WAV Бит (Студийный мастер)",
-                  priceEn: "$20 / 2000 ₽",
-                  priceRu: "$20 / 2000 ₽",
+                  serviceEn: "🥈 WAV LEASE",
+                  serviceRu: "🥈 WAV LEASE",
+                  descEn: "High-quality WAV + MP3 files and a non-exclusive license.",
+                  descRu: "MP3 + WAV высокого качества и неисключительная лицензия.",
+                  priceEn: "$20 / 2 000 ₽",
+                  priceRu: "2 000 ₽ / $20",
                   href: "/beats",
                 },
                 {
-                  serviceEn: "Exclusive Rights",
-                  serviceRu: "Exclusive Rights (Эксклюзивные права)",
-                  priceEn: "By Agreement (По договорённости)",
-                  priceRu: "По договорённости",
+                  serviceEn: "🥇 TRACKOUT LEASE",
+                  serviceRu: "🥇 TRACKOUT LEASE",
+                  descEn: "MP3 + WAV + individual STEMS for professional mixing.",
+                  descRu: "MP3 + WAV + отдельные дорожки (STEMS) для профессионального сведения.",
+                  priceEn: "$70 / 5 700 ₽",
+                  priceRu: "5 700 ₽ / $70",
+                  href: "/beats",
+                },
+                {
+                  serviceEn: "💎 UNLIMITED LEASE",
+                  serviceRu: "💎 UNLIMITED LEASE",
+                  descEn:
+                    "MP3 + WAV + STEMS, extended commercial license with unlimited streams and plays.",
+                  descRu:
+                    "MP3 + WAV + STEMS, расширенная коммерческая лицензия без лимита на прослушивания и стримы.",
+                  priceEn: "$120 / 9 800 ₽",
+                  priceRu: "9 800 ₽ / $120",
+                  href: "/beats",
+                },
+                {
+                  serviceEn: "👑 EXCLUSIVE RIGHTS",
+                  serviceRu: "👑 EXCLUSIVE RIGHTS",
+                  descEn:
+                    "Exclusive license. Beat removed from future sales. Conditions discussed individually.",
+                  descRu:
+                    "Эксклюзивная лицензия. После сделки бит снимается с дальнейшей продажи.",
+                  priceEn: "from $350 / от 29 000 ₽",
+                  priceRu: "от 29 000 ₽ / $350",
                   href: "/contact?topic=Exclusive%20Rights",
-                },
-                {
-                  serviceEn: "Custom Beat",
-                  serviceRu: "Custom Beat (Бит на заказ)",
-                  priceEn: "By Agreement (По договорённости)",
-                  priceRu: "По договорённости",
-                  href: "/contact?topic=Custom%20Beat",
-                },
-                {
-                  serviceEn: "Mixing",
-                  serviceRu: "Mixing (Сведение)",
-                  priceEn: "TBD / Upon Inquiry (Уточняется)",
-                  priceRu: "Уточняется",
-                  href: "/contact?topic=Mixing",
-                },
-                {
-                  serviceEn: "Mastering",
-                  serviceRu: "Mastering (Мастеринг)",
-                  priceEn: "TBD / Upon Inquiry (Уточняется)",
-                  priceRu: "Уточняется",
-                  href: "/contact?topic=Mastering",
                 },
               ].map((row, idx) => (
                 <div
                   key={row.serviceEn}
-                  className="flex flex-col justify-between gap-3 px-5 py-4 transition hover:bg-red-950/15 sm:flex-row sm:items-center sm:px-8 sm:py-5"
+                  className="flex flex-col justify-between gap-4 px-5 py-5 transition hover:bg-red-950/15 md:flex-row md:items-center md:px-8"
                 >
-                  <div className="flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-red-400">
-                      0{idx + 1}
-                    </span>
-                    <span className="font-display text-lg font-bold text-white md:text-xl">
-                      {isRu ? row.serviceRu : row.serviceEn}
-                    </span>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-xs text-red-400">
+                        0{idx + 1}
+                      </span>
+                      <span className="font-display text-lg font-bold text-white md:text-xl">
+                        {isRu ? row.serviceRu : row.serviceEn}
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#85878D] md:pl-7">
+                      {isRu ? row.descRu : row.descEn}
+                    </p>
                   </div>
-                  <div className="flex items-center justify-between gap-4 sm:justify-end">
-                    <span className="font-mono text-sm font-bold text-[#E8E8E8] md:text-base">
+
+                  <div className="flex items-center justify-between gap-5 md:justify-end">
+                    <span className="font-mono text-base font-bold text-white">
                       {isRu ? row.priceRu : row.priceEn}
                     </span>
                     <Link
                       href={row.href}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-white transition hover:border-red-500 hover:bg-red-600"
+                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 font-mono text-xs uppercase tracking-wider text-white transition hover:border-red-500 hover:bg-red-600"
                     >
                       <span>{isRu ? "Выбрать" : "Select"}</span>
                       <ArrowUpRight size={13} />
@@ -126,7 +139,7 @@ export default function ServicesPage() {
               <Interactive3DTilt intensity={7} className="h-full">
                 <div className="surface-card surface-card-hover flex h-full flex-col justify-between rounded-3xl p-6 sm:p-8">
                   <div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                       <span className="font-mono text-xs text-red-400">
                         {`//${srv.index}`}
                       </span>
@@ -158,11 +171,21 @@ export default function ServicesPage() {
                   </div>
 
                   <Link
-                    href={`/contact?topic=${encodeURIComponent(srv.topicValue)}`}
+                    href={
+                      srv.id === "srv-exclusive" || srv.id === "srv-custom-beat"
+                        ? `/contact?topic=${encodeURIComponent(srv.topicValue)}`
+                        : "/beats"
+                    }
                     className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#050505] transition hover:bg-red-500 hover:text-white"
                   >
                     <span>
-                      {isRu ? "Оформить заявку" : "Request Details"}
+                      {srv.id === "srv-exclusive" || srv.id === "srv-custom-beat"
+                        ? isRu
+                          ? "Написать в Direct / Заявка"
+                          : "Send Inquiry / DM"
+                        : isRu
+                        ? "Выбрать бит в каталоге"
+                        : "Choose Beat in Store"}
                     </span>
                     <ArrowUpRight size={14} />
                   </Link>
@@ -171,6 +194,29 @@ export default function ServicesPage() {
             </FadeUpBlock>
           ))}
         </div>
+
+        {/* Why Choose My Beats Footer Box */}
+        <FadeUpBlock delay={0.18}>
+          <div className="surface-glass mt-14 rounded-3xl p-6 sm:p-10">
+            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-red-400">
+              <Sparkles size={15} />
+              <span>
+                {isRu ? "ПОЧЕМУ СТОИТ ВЫБРАТЬ МОИ БИТЫ?" : "WHY CHOOSE MY BEATS?"}
+              </span>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm text-white">
+              {(isRu ? whyChooseFeatures.ru : whyChooseFeatures.en).map((f) => (
+                <div
+                  key={f}
+                  className="flex items-center gap-2.5 rounded-2xl border border-white/10 bg-[#050505]/60 p-4"
+                >
+                  <CheckCircle2 size={16} className="shrink-0 text-red-400" />
+                  <span>{f}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeUpBlock>
       </section>
     </PageFrame>
   );

@@ -202,27 +202,17 @@ export default function HomePage() {
           <div className="flex w-max animate-marquee items-center gap-8 whitespace-nowrap font-display text-[11px] font-bold uppercase tracking-[0.26em] text-[#E8E8E8]">
             {Array.from({ length: 2 }).map((_, loopIndex) => (
               <React.Fragment key={loopIndex}>
-                <span className="text-red-400">FOXPHASE</span>
+                <span className="text-red-400">PRODUCED BY FOXPHASE</span>
                 <span>•</span>
-                <span>
-                  {isRu
-                    ? "НЕЗАВИСИМЫЙ ЗВУК. БЕЗ ГРАНИЦ."
-                    : "INDEPENDENT SOUND. NO LIMITS."}
-                </span>
+                <span>🥉 MP3 LEASE — 1 000 ₽ / $15</span>
                 <span>•</span>
-                <span className="text-white">
-                  TRAP / RAGE / AMBIENT / PHONK / HOUSE / EXPERIMENTAL
-                </span>
+                <span>🥈 WAV LEASE — 2 000 ₽ / $20</span>
                 <span>•</span>
-                <span className="text-red-300">MP3 LEASE $15 / 1500 ₽</span>
+                <span className="text-red-300">🥇 TRACKOUT LEASE — 5 700 ₽ / $70</span>
                 <span>•</span>
-                <span className="text-red-300">WAV MASTER $20 / 2000 ₽</span>
+                <span className="text-red-300">💎 UNLIMITED LEASE — 9 800 ₽ / $120</span>
                 <span>•</span>
-                <span>
-                  {isRu
-                    ? "ЭКСКЛЮЗИВНЫЕ ПРАВА ПО ДОГОВОРЁННОСТИ"
-                    : "EXCLUSIVE RIGHTS BY AGREEMENT"}
-                </span>
+                <span className="text-white">👑 EXCLUSIVE RIGHTS — от 29 000 ₽ / $350</span>
                 <span>•</span>
               </React.Fragment>
             ))}
@@ -337,12 +327,12 @@ export default function HomePage() {
                       <div className="relative flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
                         <div>
                           <span className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#85878D]">
-                            {isRu ? "ЛИЦЕНЗИЯ ОТ" : "LICENSE FROM"}
+                            {isRu ? "MP3 LEASE" : "MP3 LEASE"}
                           </span>
                           <span className="font-display text-lg font-bold text-white">
-                            $15{" "}
+                            {isRu ? "1 000 ₽ " : "$15 "}
                             <span className="font-mono text-xs font-normal text-[#85878D]">
-                              / 1500 ₽
+                              {isRu ? "/ $15" : "/ 1 000 ₽"}
                             </span>
                           </span>
                         </div>

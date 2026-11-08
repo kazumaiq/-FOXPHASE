@@ -1,6 +1,11 @@
 export type Genre = "Trap" | "Rage" | "Ambient" | "Phonk" | "House" | "Experimental";
 
-export type LicenseTierId = "basic" | "premium" | "unlimited" | "exclusive";
+export type LicenseTierId =
+  | "basic"
+  | "premium"
+  | "trackout"
+  | "unlimited"
+  | "exclusive";
 
 export interface BeatLicenseOption {
   id: LicenseTierId;
