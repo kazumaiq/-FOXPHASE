@@ -59,8 +59,8 @@ export default function ReleasesPage() {
               <div className="min-w-0">
                 <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-white">
                   {isRu
-                    ? "ОФИЦИАЛЬНАЯ КАРТОЧКА АРТИСТА · STREAMING & ЯНДЕКС МУЗЫКА"
-                    : "VERIFIED ARTIST HUB · STREAMING & YANDEX MUSIC"}
+                    ? "ОФИЦИАЛЬНАЯ КАРТОЧКА АРТИСТА · ЯНДЕКС МУЗЫКА И СТРИМИНГ"
+                    : "ОФИЦИАЛЬНЫЙ ПРОФИЛЬ · ЯНДЕКС МУЗЫКА"}
                 </p>
                 <p className="mt-1.5 max-w-2xl text-xs leading-6 text-[#85878D] sm:text-sm">
                   {isRu
@@ -114,7 +114,7 @@ export default function ReleasesPage() {
                               className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-bold backdrop-blur-md ${accentBadge}`}
                             >
                               <Sparkles size={11} />
-                              <span>OFFICIAL COVER</span>
+                              <span>ОРИГИНАЛЬНЫЙ РЕЛИЗ</span>
                             </span>
                           </div>
 
@@ -142,7 +142,7 @@ export default function ReleasesPage() {
 
                     <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-5">
                       <span className="font-mono text-xs uppercase tracking-widest text-amber-300">
-                        PROD. BY FOXPHASE
+                        FOXPHASE PRODUCTION
                       </span>
                       <a
                         href={rel.yandexMusicUrl}

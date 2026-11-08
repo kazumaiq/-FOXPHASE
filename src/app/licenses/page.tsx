@@ -108,7 +108,7 @@ export default function LicensesPage() {
               <div className="flex flex-col justify-between gap-4 rounded-2xl border border-cyan-400/30 bg-[#050505]/90 p-5 sm:p-6">
                 <div>
                   <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-300">
-                    PRODUCED BY FOXPHASE
+                    АВТОРСКИЙ ПРОДАКШН FOXPHASE
                   </span>
                   <p className="mt-2 text-xs leading-6 text-[#85878D]">
                     {isRu
@@ -166,9 +166,7 @@ export default function LicensesPage() {
                           <span
                             className={`font-mono text-[10px] font-bold uppercase tracking-[0.22em] ${theme.badge}`}
                           >
-                            {`0${index + 1} // ${
-                              isRu ? lic.badge.ru : lic.badge.en
-                            }`}
+                            {`ТАРИФ 0${index + 1}`}
                           </span>
                           <h2 className="mt-2 break-words font-display text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
                             {isRu ? lic.name.ru : lic.name.en}

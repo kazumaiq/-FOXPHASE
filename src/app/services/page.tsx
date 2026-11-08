@@ -93,7 +93,7 @@ export default function ServicesPage() {
                         <span
                           className={`rounded-full border px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider ${theme.badge}`}
                         >
-                          {`TIER // ${srv.index}`}
+                          {`ТАРИФ 0${idx + 1}`}
                         </span>
                         {isExclusive && (
                           <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-widest text-amber-300">

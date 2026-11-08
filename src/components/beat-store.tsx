@@ -115,7 +115,7 @@ export function BeatStore() {
           <div className="min-w-0">
             <FadeUpBlock>
               <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-300 sm:text-xs">
-                [FOXPHASE // OFFICIAL INSTRUMENTAL STORE]
+                ОФИЦИАЛЬНЫЙ КАТАЛОГ БИТОВ FOXPHASE
               </p>
             </FadeUpBlock>
             <RevealHeading

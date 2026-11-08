@@ -101,11 +101,13 @@ export function AdminConsole() {
     setLoading(true);
     setAuthError("");
 
+    const trimmedPassword = password.trim();
+
     try {
       const res = await fetch("/api/admin/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password: trimmedPassword }),
       });
 
       if (res.ok) {
@@ -113,11 +115,11 @@ export function AdminConsole() {
         setPassword("");
         loadAdminData();
       } else {
-        const err = await res.json();
-        setAuthError(err.message || "Неверный пароль");
+        const err = await res.json().catch(() => ({}));
+        setAuthError(err.message || "Неверный пароль администратора. Проверьте правильность ввода.");
       }
     } catch {
-      setAuthError("Ошибка сервера при авторизации");
+      setAuthError("Ошибка сервера при авторизации. Попробуйте обновить страницу.");
     } finally {
       setLoading(false);
     }
@@ -231,10 +233,19 @@ export function AdminConsole() {
           </form>
 
           <div className="relative mt-6 rounded-2xl border border-white/10 bg-[#050505]/70 p-4 text-xs text-[#85878D]">
-            <p className="font-semibold text-white mb-1">🔑 Подсказка для доступа:</p>
-            <p className="leading-5">
-              По умолчанию установлен пароль: <code className="text-amber-300 font-mono">foxphase2026</code>.
-              Вы можете изменить его в переменных Vercel (<code className="text-white">ADMIN_PASSWORD</code>).
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-white">🔑 Подсказка для доступа:</span>
+              <button
+                type="button"
+                onClick={() => setPassword("foxphase2026")}
+                className="font-mono text-[11px] text-amber-300 hover:underline"
+              >
+                Подставить пароль
+              </button>
+            </div>
+            <p className="mt-2 leading-5">
+              Установленный пароль по умолчанию: <code className="text-amber-300 font-mono font-bold select-all">foxphase2026</code>.
+              Вводите его маленькими латинскими буквами без пробелов.
             </p>
           </div>
         </div>

@@ -35,7 +35,7 @@ export default function CollaborationsPage() {
                 <div className="surface-card surface-card-hover group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-7">
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs uppercase tracking-[0.24em] text-red-400">
-                      {`COLLAB // ${artist.index}`}
+                      {`АРТИСТ ${artist.index}`}
                     </span>
                     <Users
                       size={15}

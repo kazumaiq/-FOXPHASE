@@ -92,7 +92,7 @@ export default function AboutPage() {
               label={
                 isRu
                   ? "ИНТЕРАКТИВНЫЙ 3D ГИРОСКОП FOXPHASE"
-                  : "INTERACTIVE 3D GYROSCOPE // FOXPHASE"
+                  : "FOXPHASE · 3D ОБЪЕКТ"
               }
             />
           </div>

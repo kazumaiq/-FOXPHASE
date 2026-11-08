@@ -140,11 +140,11 @@ export default function HomePage() {
                   </span>
                 </div>
                 <div className="hidden items-center gap-6 font-mono text-[11px] uppercase tracking-[0.2em] text-[#85878D] md:flex">
-                  <span className="text-amber-300/90">EX. FOXMXNAXM</span>
+                  <span className="text-amber-300/90">ОФИЦИАЛЬНЫЙ САЙТ</span>
                   <span className="text-cyan-300/90">
                     5+ {isRu ? "ЛЕТ ОПЫТА" : "YEARS EXPERIENCE"}
                   </span>
-                  <span className="text-red-400">RED COSMOS 3D</span>
+                  <span className="text-red-400">STUDIO ARCHITECTURE</span>
                 </div>
               </div>
             </FadeUpBlock>
@@ -234,7 +234,7 @@ export default function HomePage() {
                             {isRu ? "ОФИЦИАЛЬНАЯ ЭМБЛЕМА" : "SIGNATURE EMBLEM"}
                           </p>
                           <p className="truncate font-display text-[11px] font-bold uppercase tracking-wider text-white sm:text-xs">
-                            FOXPHASE // CHROME 3D
+                            FOXPHASE · OFFICIAL LOGO
                           </p>
                         </div>
                         <span className="shrink-0 rounded-full border border-cyan-400/35 bg-cyan-950/30 px-2.5 py-1 font-mono text-[10px] text-cyan-200">
@@ -311,7 +311,7 @@ export default function HomePage() {
           <div className="mb-10 flex flex-col justify-between gap-4 md:mb-14 md:flex-row md:items-end">
             <div>
               <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-amber-300">
-                {`[02 // ${isRu ? "ПРОДАЖА БИТОВ" : "BEATS FOR SALE"}]`}
+                {isRu ? "ПРОДАЖА АВТОРСКИХ БИТОВ" : "BEATS FOR SALE"}
               </p>
               <RevealHeading
                 as="h2"
@@ -512,7 +512,7 @@ export default function HomePage() {
                                 {rel.code}
                               </span>
                               <span className="rounded-full border border-emerald-400/40 bg-emerald-950/70 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-emerald-300 backdrop-blur-md">
-                                VERIFIED ART
+                                ОФИЦИАЛЬНЫЙ РЕЛИЗ
                               </span>
                             </div>
                             <div className="absolute bottom-3 left-3 right-3">
@@ -707,7 +707,7 @@ export default function HomePage() {
                       className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 text-xs leading-5 text-[#E8E8E8]"
                     >
                       <span className="mb-1.5 block font-mono text-[10px] text-amber-300">
-                        {`0${idx + 1} // FOXPHASE`}
+                        {`ПРЕИМУЩЕСТВО 0${idx + 1}`}
                       </span>
                       {reason}
                     </div>
@@ -748,7 +748,7 @@ export default function HomePage() {
                     label={
                       isRu
                         ? "3D АКУСТИЧЕСКОЕ ЯДРО FOXPHASE"
-                        : "3D ACOUSTIC CORE // INTERACTIVE"
+                        : "ИНТЕРАКТИВНЫЙ 3D ОБЪЕКТ"
                     }
                   />
                 </div>
@@ -827,7 +827,7 @@ export default function HomePage() {
                 <div className="surface-card surface-card-hover flex items-center justify-between rounded-2xl px-4 py-4 sm:px-5">
                   <div className="min-w-0">
                     <span className="font-mono text-[10px] text-amber-300">
-                      {`//${artist.index}`}
+                      {`АРТИСТ ${artist.index}`}
                     </span>
                     <p className="mt-1 truncate font-display text-sm font-bold tracking-wide text-white sm:text-lg">
                       {artist.name}
