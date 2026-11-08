@@ -6,6 +6,7 @@ import { beats } from "@/content/site";
 import { getLicenseMeta } from "@/lib/shop";
 import { escapeHtml, notifyProducer } from "@/lib/notify";
 import { createYookassaPayment, isYookassaConfigured } from "@/lib/yookassa";
+import { addOrder } from "@/lib/admin-store";
 
 const schema = z.object({
   email: z.string().trim().email().max(160),
@@ -86,6 +87,19 @@ export async function POST(request: Request) {
   const totalUsd = lines.reduce((s, l) => s + l.usd, 0);
   const orderId = createOrderId();
   const origin = siteOrigin(request);
+
+  // Save order into Admin panel store
+  addOrder({
+    orderId,
+    name,
+    email,
+    contact,
+    comment,
+    items: lines.map((l) => ({ title: l.title, license: l.license, rub: l.rub, usd: l.usd })),
+    totalRub,
+    totalUsd,
+    source: "checkout",
+  });
 
   const orderSummary = lines
     .map((l, i) => `${i + 1}. ${escapeHtml(l.title)} — ${l.license} — ${l.rub} ₽ / $${l.usd}`)
