@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { FoxphaseProvider } from "@/components/providers/foxphase-provider";
 import { GlobalAudioPlayer } from "@/components/audio-player";
+import { MobileDock } from "@/components/shop/mobile-dock";
+import { CartToast } from "@/components/shop/cart-toast";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -74,6 +76,8 @@ export default function RootLayout({
         <FoxphaseProvider>
           {children}
           <GlobalAudioPlayer />
+          <CartToast />
+          <MobileDock />
         </FoxphaseProvider>
       </body>
     </html>

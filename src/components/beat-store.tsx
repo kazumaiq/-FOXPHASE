@@ -17,6 +17,8 @@ import { beats, genresList } from "@/content/site";
 import { useFoxphase } from "@/components/providers/foxphase-provider";
 import { RevealHeading, FadeUpBlock } from "@/components/motion/reveal-text";
 import { InteractiveSonicCanvas } from "@/components/motion/interactive-sonic-canvas";
+import { LicensePicker } from "@/components/shop/license-picker";
+import { formatRub, formatUsd, getLicenseMeta } from "@/lib/shop";
 import type { LicenseTierId } from "@/types/foxphase";
 
 export function BeatStore() {
@@ -24,7 +26,6 @@ export function BeatStore() {
     locale,
     cart,
     addToCart,
-    cartTotal,
     favorites,
     toggleFavorite,
     isFavorite,
@@ -133,24 +134,24 @@ export function BeatStore() {
             </Link>
             <Link
               href="/cart"
-              className="inline-flex items-center gap-2.5 rounded-full bg-white px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] shadow-chrome-sm transition hover:bg-amber-300"
+              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-amber-300 via-orange-400 to-amber-300 px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] shadow-chrome-sm transition hover:brightness-110"
             >
               <ShoppingBag size={15} />
               <span>
-                {cart.length} {isRu ? "шт." : "items"} · ${cartTotal}
+                {cart.length} {isRu ? "в корзине" : "items"}
               </span>
             </Link>
           </div>
         </div>
 
-        {/* Multi-color Pricing Strip */}
+        {/* Multi-color Pricing Strip with Quick Jump */}
         <div className="mb-8 flex flex-col justify-between gap-4 rounded-2xl border border-amber-500/25 bg-gradient-to-r from-[#140A0D] via-[#0B0D16] to-[#110B1A] px-4 py-4 text-xs leading-6 text-[#E8E8E8] sm:px-6 lg:flex-row lg:items-center">
           <div className="flex items-start gap-3 sm:items-center">
             <Sparkles size={16} className="mt-1 shrink-0 text-amber-300 sm:mt-0" />
             <span>
               {isRu
-                ? "🔥 БИТЫ ДОСТУПНЫ К ПОКУПКЕ! Выберите подходящий тариф лицензии прямо на карточке бита:"
-                : "🔥 BEATS AVAILABLE FOR PURCHASE! Select your preferred license tier directly on any beat card:"}
+                ? "🔥 БИТЫ ДОСТУПНЫ К ПОКУПКЕ! Выбирайте лицензию прямо в карточке любого инструментала:"
+                : "🔥 BEATS AVAILABLE FOR PURCHASE! Choose a license directly on any beat card:"}
             </span>
           </div>
           <div className="flex flex-wrap gap-2 font-mono text-[11px]">
@@ -311,13 +312,16 @@ export function BeatStore() {
               const isCurrent = player.currentBeat?.id === beat.id;
               const isPlaying = isCurrent && player.isPlaying;
               const fav = isFavorite(beat.id);
-              const activeTier = selectedTiers[beat.id] ?? "basic";
-              const inCart = cart.some((item) => item.beatId === beat.id);
+              const activeTierId = selectedTiers[beat.id] ?? "basic";
+              const activeMeta = getLicenseMeta(activeTierId);
+              const inCart = cart.some(
+                (item) => item.beatId === beat.id && item.licenseId === activeTierId
+              );
 
               return (
                 <article
                   key={beat.id}
-                  className="surface-card surface-card-hover group relative overflow-hidden rounded-3xl p-5 sm:p-7"
+                  className={`surface-card surface-card-hover group relative overflow-hidden rounded-3xl p-5 sm:p-7 border ${activeMeta.theme.cardBorder}`}
                 >
                   <div
                     className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full opacity-25 blur-3xl transition group-hover:opacity-45"
@@ -348,7 +352,7 @@ export function BeatStore() {
                       </div>
                     </div>
 
-                    {/* Title & Play Trigger (Wraps cleanly on 375px Mobile — Zero Clipping) */}
+                    {/* Title & Play Trigger */}
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex min-w-0 flex-1 items-center gap-3.5">
                         <button
@@ -385,144 +389,70 @@ export function BeatStore() {
                       </Link>
                     </div>
 
-                    {/* Color-Coded License Selector Pills */}
-                    <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                      <button
-                        type="button"
-                        onClick={() =>
+                    {/* License Picker Component */}
+                    <div className="mt-5">
+                      <LicensePicker
+                        value={activeTierId}
+                        onChange={(id) =>
                           setSelectedTiers((prev) => ({
                             ...prev,
-                            [beat.id]: "basic",
+                            [beat.id]: id,
                           }))
                         }
-                        className={`rounded-xl border px-3 py-2.5 text-left transition ${
-                          activeTier === "basic"
-                            ? "border-amber-400 bg-amber-500/20 text-white shadow-sm"
-                            : "border-white/10 bg-[#050505]/70 text-[#85878D] hover:border-amber-400/40"
-                        }`}
-                      >
-                        <span className="block font-mono text-[10px] font-semibold uppercase text-amber-300">
-                          🥉 MP3 Lease
-                        </span>
-                        <span className="font-display text-sm font-bold text-white">
-                          $15{" "}
-                          <span className="font-mono text-[10px] font-normal text-[#E8E8E8]/75">
-                            / 1 000₽
-                          </span>
-                        </span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setSelectedTiers((prev) => ({
-                            ...prev,
-                            [beat.id]: "premium",
-                          }))
-                        }
-                        className={`rounded-xl border px-3 py-2.5 text-left transition ${
-                          activeTier === "premium"
-                            ? "border-cyan-400 bg-cyan-500/20 text-white shadow-sm"
-                            : "border-white/10 bg-[#050505]/70 text-[#85878D] hover:border-cyan-400/40"
-                        }`}
-                      >
-                        <span className="block font-mono text-[10px] font-semibold uppercase text-cyan-300">
-                          🥈 WAV Lease
-                        </span>
-                        <span className="font-display text-sm font-bold text-white">
-                          $20{" "}
-                          <span className="font-mono text-[10px] font-normal text-[#E8E8E8]/75">
-                            / 2 000₽
-                          </span>
-                        </span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setSelectedTiers((prev) => ({
-                            ...prev,
-                            [beat.id]: "trackout",
-                          }))
-                        }
-                        className={`rounded-xl border px-3 py-2.5 text-left transition ${
-                          activeTier === "trackout"
-                            ? "border-yellow-400 bg-yellow-500/20 text-white shadow-sm"
-                            : "border-white/10 bg-[#050505]/70 text-[#85878D] hover:border-yellow-400/40"
-                        }`}
-                      >
-                        <span className="block font-mono text-[10px] font-semibold uppercase text-yellow-300">
-                          🥇 Trackout
-                        </span>
-                        <span className="font-display text-sm font-bold text-white">
-                          $70{" "}
-                          <span className="font-mono text-[10px] font-normal text-[#E8E8E8]/75">
-                            / 5 700₽
-                          </span>
-                        </span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setSelectedTiers((prev) => ({
-                            ...prev,
-                            [beat.id]: "unlimited",
-                          }))
-                        }
-                        className={`rounded-xl border px-3 py-2.5 text-left transition ${
-                          activeTier === "unlimited"
-                            ? "border-violet-400 bg-violet-500/20 text-white shadow-sm"
-                            : "border-white/10 bg-[#050505]/70 text-[#85878D] hover:border-violet-400/40"
-                        }`}
-                      >
-                        <span className="block font-mono text-[10px] font-semibold uppercase text-violet-300">
-                          💎 Unlimited
-                        </span>
-                        <span className="font-display text-sm font-bold text-white">
-                          $120{" "}
-                          <span className="font-mono text-[10px] font-normal text-[#E8E8E8]/75">
-                            / 9 800₽
-                          </span>
-                        </span>
-                      </button>
+                        isRu={isRu}
+                        beatTitle={beat.title}
+                        includeExclusive={false}
+                      />
                     </div>
 
                     {/* Bottom Action Row */}
                     <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
-                      <span className="text-xs text-[#85878D]">
-                        From{" "}
-                        <b className="text-white">
-                          ${beat.licenses[0]?.price ?? 15}
-                        </b>{" "}
-                        · {beat.publishedAt}
-                      </span>
+                      <div>
+                        <span className="block font-mono text-[10px] uppercase text-[#85878D]">
+                          {isRu ? "Выбрано:" : "Selected:"}{" "}
+                          <strong className={activeMeta.theme.text}>
+                            {activeMeta.name}
+                          </strong>
+                        </span>
+                        <span className="font-display text-lg font-black text-white sm:text-xl">
+                          {isRu
+                            ? formatRub(activeMeta.priceRub)
+                            : formatUsd(activeMeta.priceUsd)}
+                          <span className="ml-1.5 font-mono text-xs font-normal text-[#85878D]">
+                            {isRu
+                              ? `/ ${formatUsd(activeMeta.priceUsd)}`
+                              : `/ ${formatRub(activeMeta.priceRub)}`}
+                          </span>
+                        </span>
+                      </div>
 
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
-                          onClick={() => addToCart(beat.id, activeTier)}
-                          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-white to-amber-200 px-4 py-2 text-xs font-bold text-[#050505] transition hover:brightness-110"
+                          onClick={() => addToCart(beat.id, activeTierId)}
+                          className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold transition ${activeMeta.theme.button}`}
                         >
                           <Check size={14} />
                           <span>
-                            {activeTier === "basic"
+                            {inCart
+                              ? isRu
+                                ? "В корзине (+1)"
+                                : "In Cart (+1)"
+                              : activeTierId === "basic"
                               ? "Add Basic"
-                              : activeTier === "premium"
-                              ? "Add WAV ($20)"
-                              : activeTier === "trackout"
-                              ? "Add Trackout ($70)"
-                              : "Add Unlimited ($120)"}
+                              : isRu
+                              ? `Купить ${activeMeta.name.replace(" LEASE", "")}`
+                              : `Add ${activeMeta.name.replace(" LEASE", "")}`}
                           </span>
                         </button>
-                        {inCart && (
-                          <Link
-                            href="/cart"
-                            className="rounded-full border border-emerald-400/40 bg-emerald-950/40 px-3 py-2 font-mono text-[11px] uppercase text-emerald-200 hover:bg-emerald-500/20"
-                          >
-                            {isRu ? "В корзине" : "In Cart"}
-                          </Link>
-                        )}
+
+                        <Link
+                          href="/cart"
+                          className="rounded-full border border-white/20 px-3 py-2.5 font-mono text-[11px] text-[#E8E8E8] transition hover:border-white hover:text-white"
+                          aria-label={isRu ? "Открыть корзину" : "Open Cart"}
+                        >
+                          <ShoppingBag size={14} />
+                        </Link>
                       </div>
                     </div>
                   </div>

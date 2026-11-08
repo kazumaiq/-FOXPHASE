@@ -27,6 +27,8 @@ interface FoxphaseContextValue {
   updateCartLicense: (beatId: string, licenseId: string) => void;
   clearCart: () => void;
   cartTotal: number;
+  lastAdded: { beatId: string; licenseId: string; at: number } | null;
+  dismissToast: () => void;
   favorites: string[];
   toggleFavorite: (beatId: string) => void;
   isFavorite: (beatId: string) => boolean;
@@ -51,6 +53,11 @@ export function FoxphaseProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [lastAdded, setLastAdded] = useState<{
+    beatId: string;
+    licenseId: string;
+    at: number;
+  } | null>(null);
 
   const [player, setPlayer] = useState<AudioPlayerState>({
     currentBeat: null,
@@ -138,9 +145,12 @@ export function FoxphaseProvider({ children }: { children: React.ReactNode }) {
           return items;
         }
       });
+      setLastAdded({ beatId, licenseId, at: Date.now() });
     },
     [syncCart]
   );
+
+  const dismissToast = useCallback(() => setLastAdded(null), []);
 
   const removeFromCart = useCallback(
     (beatId: string) => {
@@ -411,6 +421,8 @@ export function FoxphaseProvider({ children }: { children: React.ReactNode }) {
         updateCartLicense,
         clearCart,
         cartTotal,
+        lastAdded,
+        dismissToast,
         favorites,
         toggleFavorite,
         isFavorite,
@@ -440,6 +452,8 @@ const fallbackContext: FoxphaseContextValue = {
   updateCartLicense: () => {},
   clearCart: () => {},
   cartTotal: 0,
+  lastAdded: null,
+  dismissToast: () => {},
   favorites: [],
   toggleFavorite: () => {},
   isFavorite: () => false,

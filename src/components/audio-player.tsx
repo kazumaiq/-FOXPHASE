@@ -43,7 +43,7 @@ export function GlobalAudioPlayer() {
   return (
     <aside
       aria-label="FOXPHASE Audio Player"
-      className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/15 bg-[#050505]/95 backdrop-blur-2xl shadow-[0_-20px_50px_rgba(0,0,0,0.9)]"
+      className="fixed bottom-[calc(68px+env(safe-area-inset-bottom))] left-0 right-0 z-50 border-t border-white/15 bg-[#050505]/95 backdrop-blur-2xl shadow-[0_-20px_50px_rgba(0,0,0,0.9)] lg:bottom-0"
     >
       {/* Top interactive scrub bar */}
       <div
@@ -55,7 +55,7 @@ export function GlobalAudioPlayer() {
         }}
       >
         <div
-          className="h-full bg-gradient-to-r from-[#85878D] via-[#E8E8E8] to-white transition-all duration-150"
+          className="h-full bg-gradient-to-r from-red-500 via-amber-400 to-cyan-300 transition-all duration-150"
           style={{ width: `${player.progress}%` }}
         />
       </div>
@@ -176,10 +176,11 @@ export function GlobalAudioPlayer() {
 
           <button
             onClick={() => addToCart(beat.id, "basic")}
-            className="hidden items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:border-white hover:bg-white hover:text-[#050505] sm:inline-flex"
+            aria-label={locale === "ru" ? "Купить MP3 за 1000 ₽" : "Buy MP3 for $15"}
+            className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-300 to-orange-400 px-3 py-1.5 text-xs font-bold text-[#050505] transition hover:brightness-110"
           >
             <ShoppingBag size={13} />
-            <span>$15</span>
+            <span>{locale === "ru" ? "1000 ₽" : "$15"}</span>
           </button>
 
           <button
