@@ -4,7 +4,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ShoppingBag, Menu, X, User, Shield, ArrowUpRight } from "lucide-react";
+import {
+  ShoppingBag,
+  Menu,
+  X,
+  User,
+  Shield,
+  ArrowUpRight,
+} from "lucide-react";
 import { LanguageToggle } from "./language-toggle";
 import { useFoxphase } from "@/components/providers/foxphase-provider";
 
@@ -25,13 +32,13 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050505]/85 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 md:px-10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:px-6 md:px-10">
         {/* Brand Identity + Official Chrome FOX Emblem */}
         <Link
           href="/"
-          className="group flex items-center gap-3 focus:outline-none"
+          className="group flex min-w-0 items-center gap-2.5 focus:outline-none sm:gap-3"
         >
-          <div className="relative h-9 w-12 overflow-hidden rounded-lg border border-white/15 bg-[#050505] shadow-chrome-sm transition duration-300 group-hover:border-white/40">
+          <div className="relative h-9 w-11 shrink-0 overflow-hidden rounded-lg border border-red-500/30 bg-[#050505] shadow-chrome-sm transition duration-300 group-hover:border-red-400">
             <Image
               src="/brand/foxphase-logo-chrome.jpg"
               alt="FOXPHASE Official Chrome Logo"
@@ -41,12 +48,12 @@ export function SiteHeader() {
               priority
             />
           </div>
-          <div className="flex flex-col">
-            <span className="font-display text-base font-black tracking-[0.14em] text-chrome">
+          <div className="flex min-w-0 flex-col">
+            <span className="truncate font-display text-sm font-black tracking-[0.12em] text-chrome sm:text-base">
               FOXPHASE
             </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.28em] text-[#85878D]">
-              SOUND ARCHITECTURE
+            <span className="hidden font-mono text-[9px] uppercase tracking-[0.24em] text-red-400/90 sm:block">
+              {locale === "ru" ? "МУЗЫКАЛЬНЫЙ ПРОДЮСЕР" : "SOUND ARCHITECTURE"}
             </span>
           </div>
         </Link>
@@ -54,7 +61,7 @@ export function SiteHeader() {
         {/* Desktop Navigation */}
         <nav
           aria-label="Primary Navigation"
-          className="hidden items-center gap-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#85878D] lg:flex"
+          className="hidden items-center gap-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#85878D] lg:flex"
         >
           {navItems.map((item) => {
             const active =
@@ -69,7 +76,7 @@ export function SiteHeader() {
               >
                 {locale === "ru" ? item.ru : item.en}
                 {active && (
-                  <span className="absolute inset-x-0 -bottom-1 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent" />
+                  <span className="absolute inset-x-0 -bottom-1 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent" />
                 )}
               </Link>
             );
@@ -77,13 +84,13 @@ export function SiteHeader() {
         </nav>
 
         {/* Action Cluster */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex shrink-0 items-center gap-2">
           <LanguageToggle />
 
           <Link
             href="/account"
             aria-label={locale === "ru" ? "Личный кабинет" : "Account"}
-            className="hidden rounded-full border border-white/15 bg-white/[0.03] p-2 text-[#E8E8E8] transition hover:border-white/40 hover:bg-white/10 hover:text-white sm:inline-flex"
+            className="hidden rounded-full border border-white/15 bg-white/[0.03] p-2 text-[#E8E8E8] transition hover:border-red-500/50 hover:bg-white/10 hover:text-white sm:inline-flex"
           >
             <User size={15} />
           </Link>
@@ -91,9 +98,9 @@ export function SiteHeader() {
           <Link
             href="/cart"
             aria-label="Cart"
-            className="relative inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-2 text-xs font-semibold text-white transition hover:border-white/40 hover:bg-white/10"
+            className="relative inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-3 py-2 text-xs font-semibold text-white transition hover:border-red-500/50 hover:bg-white/10"
           >
-            <ShoppingBag size={14} />
+            <ShoppingBag size={14} className="text-red-400" />
             <span className="font-mono text-[11px]">{cart.length}</span>
           </Link>
 
@@ -102,26 +109,26 @@ export function SiteHeader() {
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="inline-flex rounded-full border border-white/15 bg-white/[0.03] p-2 text-white lg:hidden"
+            className="inline-flex rounded-full border border-white/15 bg-white/[0.04] p-2 text-white lg:hidden"
           >
-            {mobileOpen ? <X size={17} /> : <Menu size={17} />}
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Navigation Drawer */}
       {mobileOpen && (
-        <div className="border-t border-white/10 bg-[#050505]/98 px-5 py-6 backdrop-blur-2xl lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3">
+        <div className="border-t border-white/10 bg-[#050505]/98 px-4 py-5 backdrop-blur-2xl lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-2">
             {navItems.map((item, idx) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between border-b border-white/10 py-3 font-display text-lg font-bold uppercase tracking-wider text-[#E8E8E8] hover:text-white"
+                className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 font-display text-base font-bold uppercase tracking-wider text-[#E8E8E8] transition hover:border-red-500/40 hover:text-white"
               >
                 <span className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-[#85878D]">
+                  <span className="font-mono text-xs text-red-400">
                     0{idx + 1}
                   </span>
                   {locale === "ru" ? item.ru : item.en}
@@ -130,7 +137,7 @@ export function SiteHeader() {
               </Link>
             ))}
 
-            <div className="mt-4 grid grid-cols-2 gap-3 pt-2">
+            <div className="mt-3 grid grid-cols-2 gap-2.5 pt-2">
               <Link
                 href="/account"
                 onClick={() => setMobileOpen(false)}
@@ -142,10 +149,10 @@ export function SiteHeader() {
               <Link
                 href="/admin"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-[#101114] py-3 text-xs font-semibold uppercase tracking-widest text-[#85878D]"
+                className="flex items-center justify-center gap-2 rounded-xl border border-red-500/25 bg-[#101114] py-3 text-xs font-semibold uppercase tracking-widest text-red-300"
               >
                 <Shield size={14} />
-                Admin
+                {locale === "ru" ? "Админ" : "Admin"}
               </Link>
             </div>
           </div>

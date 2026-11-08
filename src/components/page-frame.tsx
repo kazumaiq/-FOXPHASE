@@ -3,7 +3,11 @@
 import React from "react";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
-import { RevealHeading, FadeUpBlock } from "./motion/reveal-text";
+import {
+  RevealHeading,
+  FadeUpBlock,
+  ParallaxSection,
+} from "./motion/reveal-text";
 import { InteractiveSonicCanvas } from "./motion/interactive-sonic-canvas";
 
 export function PageFrame({
@@ -18,31 +22,33 @@ export function PageFrame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen bg-[#050505] text-[#E8E8E8]">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-[#050505] text-[#E8E8E8]">
       <InteractiveSonicCanvas />
       <SiteHeader />
-      <main className="relative z-10">
-        <section className="mx-auto max-w-7xl px-5 pb-12 pt-16 md:px-10 md:pt-28">
-          <FadeUpBlock>
-            <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-[#E8E8E8]">
-              <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              {eyebrow}
-            </div>
-          </FadeUpBlock>
-
-          <RevealHeading
-            as="h1"
-            text={title}
-            className="max-w-5xl font-display text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] text-chrome sm:text-6xl md:text-7xl"
-          />
-
-          {subtitle && (
-            <FadeUpBlock delay={0.18}>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-[#85878D] md:text-lg">
-                {subtitle}
-              </p>
+      <main className="relative z-10 w-full overflow-x-hidden">
+        <section className="mx-auto max-w-7xl px-4 pb-10 pt-12 sm:px-6 md:px-10 md:pt-24">
+          <ParallaxSection offset={22}>
+            <FadeUpBlock>
+              <div className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-red-500/30 bg-red-950/20 px-3.5 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#E8E8E8] sm:text-[11px] sm:tracking-[0.26em]">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]" />
+                <span className="truncate">{eyebrow}</span>
+              </div>
             </FadeUpBlock>
-          )}
+
+            <RevealHeading
+              as="h1"
+              text={title}
+              className="max-w-5xl font-display text-3xl font-black uppercase leading-[0.95] tracking-[-0.03em] text-chrome sm:text-5xl md:text-7xl"
+            />
+
+            {subtitle && (
+              <FadeUpBlock delay={0.16}>
+                <p className="mt-5 max-w-2xl text-sm leading-6 text-[#85878D] sm:text-base sm:leading-7 md:text-lg">
+                  {subtitle}
+                </p>
+              </FadeUpBlock>
+            )}
+          </ParallaxSection>
         </section>
         {children}
       </main>

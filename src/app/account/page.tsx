@@ -23,7 +23,7 @@ export default function AccountPage() {
   return (
     <PageFrame
       eyebrow={isRu ? "ЛИЧНЫЙ КАБИНЕТ ПОКУПАТЕЛЯ" : "CUSTOMER ACCOUNT & VAULT"}
-      title={isRu ? "YOUR LIBRARY, SECURELY." : "YOUR LIBRARY, SECURELY."}
+      title={isRu ? "ВАША БИБЛИОТЕКА И ЗАКАЗЫ." : "YOUR LIBRARY, SECURELY."}
       subtitle={
         isRu
           ? "Управление профилем, избранными битами, историей заказов, лицензиями и защищёнными ссылками на скачивание."

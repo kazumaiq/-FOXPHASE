@@ -15,19 +15,21 @@ export default function ContactPage() {
   return (
     <PageFrame
       eyebrow={isRu ? "КОНТАКТЫ И СОТРУДНИЧЕСТВО" : "DIRECT CONTACT & INQUIRIES"}
-      title={isRu ? "LET'S MAKE IT MOVE." : "LET'S MAKE IT MOVE."}
+      title={isRu ? "СВЯЗАТЬСЯ СО СТУДИЕЙ." : "LET'S MAKE IT MOVE."}
       subtitle={
         isRu
           ? "Для индивидуальных заказов (Custom Beat), сведения, мастеринга, совместных работ и выкупа эксклюзивных прав (Exclusive Rights)."
           : "For custom production, mixing, mastering, artist collaborations, and exclusive-rights acquisitions."
       }
     >
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-28 md:grid-cols-[0.95fr_1.05fr] md:px-10">
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 pb-28 sm:px-6 md:grid-cols-[0.95fr_1.05fr] md:px-10">
         {/* Direct Channels */}
         <FadeUpBlock className="space-y-6">
-          <div className="surface-card rounded-3xl p-8">
-            <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#85878D]">
-              [01 // {isRu ? "ОФИЦИАЛЬНЫЕ ССЫЛКИ" : "OFFICIAL NETWORKS"}]
+          <div className="surface-card rounded-3xl p-6 sm:p-8">
+            <span className="font-mono text-xs uppercase tracking-[0.24em] text-red-400">
+              {`[01 // ${
+                isRu ? "ОФИЦИАЛЬНЫЕ ССЫЛКИ" : "OFFICIAL NETWORKS"
+              }]`}
             </span>
             <p className="mt-4 text-sm leading-7 text-[#85878D]">
               {isRu
@@ -42,11 +44,11 @@ export default function ContactPage() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center justify-between py-4 font-display text-lg font-bold text-white transition hover:text-[#E8E8E8]"
+                  className="group flex items-center justify-between py-4 font-display text-lg font-bold text-white transition hover:text-red-400"
                 >
                   <span>{name}</span>
                   <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-[#85878D] group-hover:text-white">
-                    <span>{isRu ? "Открыть" : "Connect"}</span>
+                    <span>{isRu ? "Перейти" : "Connect"}</span>
                     <ArrowUpRight size={15} />
                   </span>
                 </a>
@@ -54,9 +56,9 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="surface-glass rounded-3xl p-7">
+          <div className="surface-glass rounded-3xl p-6 sm:p-7">
             <div className="flex items-center gap-3">
-              <Send size={17} className="text-white" />
+              <Send size={17} className="text-red-400" />
               <span className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-white">
                 TELEGRAM DIRECT
               </span>
@@ -71,9 +73,9 @@ export default function ContactPage() {
 
         {/* Studio Inquiry Form */}
         <FadeUpBlock delay={0.1}>
-          <div className="surface-card rounded-3xl p-8 md:p-10">
-            <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#85878D]">
-              [02 // {isRu ? "ФОРМА ЗАЯВКИ" : "PROJECT & RIGHTS BRIEF"}]
+          <div className="surface-card rounded-3xl p-6 sm:p-10">
+            <span className="font-mono text-xs uppercase tracking-[0.24em] text-red-400">
+              {`[02 // ${isRu ? "ФОРМА ЗАЯВКИ" : "PROJECT & RIGHTS BRIEF"}]`}
             </span>
             <h2 className="mt-3 font-display text-2xl font-black uppercase text-white md:text-3xl">
               {isRu ? "ОТПРАВИТЬ ЗАПРОС В СТУДИЮ" : "SUBMIT STUDIO INQUIRY"}
